@@ -1,7 +1,11 @@
+@font-face {
+  font-family: 'Roboto_Slab';
+  src: local('Roboto_Slab'), url(./fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf) format('truetype');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: 'Roboto_Slab',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
