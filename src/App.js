@@ -26,7 +26,8 @@ const GlobalStyles = createGlobalStyle`
 const DisplayGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(200px, 2fr));
-  /* position: relative; */
+  position: relative;
+  z-index: -10;
   overflow: hidden;
 `;
 
@@ -38,7 +39,6 @@ class App extends React.Component {
 		contact: false
 	}
 	changeView = (e) => {
-    console.log(e.target.id);
 		this.setState({
 			about: false,
 			showreel: false,

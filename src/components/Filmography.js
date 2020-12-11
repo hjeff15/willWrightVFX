@@ -14,7 +14,6 @@ const FilmCard = styled.div`
 export default class Filmography extends Component {
     render() {
         const {filmography} = willDetails;
-        console.log(filmography);
         return (
             <FilmList>
                 {filmography.map((film, index)=> (
