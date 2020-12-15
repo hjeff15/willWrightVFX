@@ -1,8 +1,16 @@
 import React from 'react'
-import { FaImdb, FaTwitter, FaLinkedin } from 'react-icons/fa';
-import styled from "styled-components";
+import { FaImdb, FaLinkedin } from 'react-icons/fa';
+import { FiSend } from 'react-icons/fi';
+import styled, {keyframes} from "styled-components";
 import emailjs from 'emailjs-com';
+import SentMessage from './SentMessage';
 
+// Keyframes
+const ContactGridFade = keyframes`
+    0% {opacity: 0}
+    100% {opacity: 1}
+`;
+// Styles
 const ContactGrid = styled.div`
     display: grid;
     grid-template-columns: 20vw 60vw 20vw;
@@ -10,34 +18,54 @@ const ContactGrid = styled.div`
     grid-template-areas:
         ". top ." 
         ". middle ."
-        ". bottom ."
+        ". bottom .";
+    animation-name: ${ContactGridFade};
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    z-index: 1;
+    scroll-behavior: smooth;
+    @media only screen and (max-width: 650px){
+        grid-row-start: 1;
+        grid-row-end: 3;
+        margin-left: 0vw;
+    }
+    @media only screen and (max-width: 400px){
+        position: sticky;
+        top: 310px;
+    }
 `;
 
 const ContactTitle = styled.h2`
     grid-area: top;
     justify-self: center;
     color: rgba(255,245,245,0.6);
+    @media only screen and (max-width: 400px){
+        z-index: -1;
+    }
 `;
 
 const FormArea = styled.form`
     grid-area: middle;
     display: grid;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
+    /* border: 1px solid rgba(255,255,0,0.2); */
+    border-radius: 5px;
 `;
 
 const NameArea = styled.label`
-    justify-self: center;
+    color: rgba(255,245,245,0.6);
+    place-self: center;
     margin: 5px;
     padding: 2px;
 `;
 const EmailArea = styled.label`
-    justify-self: center;
+    color: rgba(255,245,245,0.6);
+    place-self: center;
     margin: 5px;
     padding: 2px;
 `;
 const SubjectArea = styled.label`
-    justify-self: center;
+    color: rgba(255,245,245,0.6);
+    place-self: center;
     margin: 5px;
     padding: 2px;
 `;
@@ -49,90 +77,113 @@ const TextBox = styled.textarea`
 `;
 
 const Input = styled.input`
-    padding-left: 10px;
     border-radius: 5px;
+    margin-left: 20px;
 `;
 
 const ButtonBox = styled.button`
     font-family: 'Roboto_Slab', sans-serif;
-    font-size: 1.2rem;
-    border-radius: 20px;
-    margin: 10px;
-    color: white;
+    border-radius: 5px;
+    padding: 4px 10px 2px 5px;
+    place-self: center;
     background-color: black;
+    :hover{
+        cursor: pointer;
+    }
 `;
 
 const Social = styled.div`
     grid-area: bottom;
     display: flex;
-    justify-content: space-around;
+    align-items: start;
+    justify-content: flex-end;
+    border-radius: 5px;
+`;
+const SocialIconEl = styled.h2`
+    margin-top: 0px;
 `;
 
-export default function Contact(){
-    console.log(process.env.REACT_APP_SERVICE_ID);
-    function sendEmail(e) {
-        e.preventDefault();
+class Contact extends React.Component{
+    constructor(){
+        super();
+        this.sendEmail = this.sendEmail.bind(this);
+    }
+    state = {
+        formVisible: true
+    }
 
-        emailjs.sendForm(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, e.target, process.env.REACT_APP_USER_ID)
+    sendEmail(e) {
+        e.preventDefault();
+        emailjs
+            .sendForm(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, e.target, process.env.REACT_APP_USER_ID)
             .then((result) => {
-                console.log(result.text);
+                this.setState({
+                    formVisible: false
+                });
+                window.scrollTo(0, 0);
             }, (error) => {
                 console.log(error.text);
             });
     }
-    return (
-        <ContactGrid>
-            <ContactTitle>Get in touch with me...</ContactTitle>
-            <FormArea onSubmit={sendEmail}>
-                <NameArea htmlFor="name">
-                    Name:
-                    <Input
-                        name='name'
-                        type='text'
-                        id='name'
-                        required
-                        placeholder='Your name ...'
-                    ></Input>
-                </NameArea>
-                <EmailArea htmlFor='email'>
-                    Email:
-                    <Input
-                        name='email'
-                        type='email'
-                        id='email'
-                        required
-                        placeholder='Your email ...'
-                    ></Input>
-                </EmailArea>
-                <SubjectArea htmlFor='subject'>
-                    Subject:
-                    <Input
-                        name='subject'
-                        type='subject'
-                        id='subject'
-                        required
-                        placeholder='Subject...'
-                    ></Input>
-                </SubjectArea>
-                <TextBox
-                    className='message'
-                    name='message'
-                    id='message'
-                    cols='30'
-                    rows='10'
-                    placeholder='Type your message here...'
-                    >
-                </TextBox>
-                <ButtonBox id="submit" type='submit'>
-                    SEND
-                </ButtonBox>
-            </FormArea>
-            <Social>
-                <h3><FaImdb /></h3>
-                <h3><FaTwitter /></h3>
-                <h3><FaLinkedin /></h3>
-            </Social>
-        </ContactGrid>
-    )
+    render(){
+        return (
+            <ContactGrid>
+                {!this.state.formVisible && <SentMessage />}
+                {this.state.formVisible && <ContactTitle>Get in touch with me...</ContactTitle>}
+                {this.state.formVisible && <FormArea onSubmit={this.sendEmail} >
+                    <NameArea htmlFor="name">
+                        Name:
+                        <Input
+                            name='user_name'
+                            type='text'
+                            id='name'
+                            required
+                            placeholder='Your name ...'
+                        ></Input>
+                    </NameArea>
+                    <EmailArea htmlFor='email'>
+                        Email:
+                        <Input
+                            name='user_email'
+                            type='email'
+                            id='email'
+                            required
+                            placeholder='Your email ...'
+                        ></Input>
+                    </EmailArea>
+                    <SubjectArea htmlFor='subject'>
+                        Subject:
+                        <Input
+                            name='user_subject'
+                            type='subject'
+                            id='subject'
+                            required
+                            placeholder='Subject...'
+                        ></Input>
+                    </SubjectArea>
+                    <TextBox
+                        name='user_message'
+                        id='message'
+                        cols='30'
+                        rows='10'
+                        placeholder='Type your message here...'
+                        >
+                    </TextBox>
+                    <ButtonBox id="submit" type='submit'>
+                        <FiSend size={32} color="white" />
+                    </ButtonBox>
+                </FormArea>}
+                <Social>
+                    <a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer">
+                        <SocialIconEl><FaImdb color="rgba(187, 187, 22, 0.68)" /></SocialIconEl>
+                    </a>
+                    <a href="https://www.linkedin.com/in/willwrightvfx/" target="_blank" rel="noopener noreferrer">
+                        <SocialIconEl><FaLinkedin color="rgba(22, 129, 187, 0.68)"/></SocialIconEl>
+                    </a>
+                </Social>
+            </ContactGrid>
+        )
+    }
 }
+export default Contact;
 

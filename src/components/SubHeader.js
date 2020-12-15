@@ -9,9 +9,10 @@ const WillSubHeader = styled.h3`
     justify-content: center;
     color: rgba(255,255,255,0.5);
     margin-bottom: 10px;
+    padding-bottom: 30px;
     /* padding-bottom: 13px; */
     position:sticky;
-    top: 40px;
+    top: 53px;
 `;
 
 export default class SubHeader extends Component {

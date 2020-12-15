@@ -6,6 +6,11 @@ const ShowreelVid = styled.div`
     display: grid;
     justify-content: center;
     margin-left: 50vw;
+    @media only screen and (max-width: 650px){
+        grid-row-start: 1;
+        grid-row-end: 3;
+        margin-left: 0vw;
+    }
 `;
 
 export default class Showreel extends Component {

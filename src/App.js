@@ -20,24 +20,36 @@ const GlobalStyles = createGlobalStyle`
     align-items: center;
     justify-content: center;
     font-size: calc(5px + 2vmin);
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
   }
 `;
 
 const DisplayGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, minmax(200px, 2fr));
-  position: relative;
-  z-index: -10;
-  overflow: hidden;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(200px, 50vw));
+	grid-template-rows: auto;
+	position: relative;
+	@media only screen and (max-width: 650px){
+		grid-template-columns: 100vw;
+		grid-template-rows: 25vh auto;
+		grid-template-areas: 
+			"top"
+			"bottom";
+		}
 `;
 
+
+
 class App extends React.Component {
-  state = {
+	state = {
 		about: true,
 		showreel: false,
 		filmography: false,
-		contact: false
+		contact: false,
+		contactView: true
 	}
+
 	changeView = (e) => {
 		this.setState({
 			about: false,
@@ -66,23 +78,24 @@ class App extends React.Component {
 			})
 		}
 	}
-  render(){
-    return (
-      <div>
-        <GlobalStyles/>
-        <Header/>
-        <SubHeader/>
-        <Nav changeView={this.changeView}/>
-        <DisplayGrid>
+	render(){
+		console.log("IF YOU'RE HERE YOU CAN SEE MY PORTFOLIO HERE - https://www.hugojeffreys.me/ ")
+		return (
+			<div>
+				<GlobalStyles/>
+				<Header />
+				<SubHeader/>
+				<Nav changeView={this.changeView}/>
+				<DisplayGrid>
 					{this.state.about && <About /> }   
 					{this.state.about && <WillImage /> }   
 					{this.state.showreel && <Showreel /> }   
 					{this.state.filmography && <Filmography /> }   
 					{this.state.contact && <Contact /> }   
 				</DisplayGrid>
-      </div>
-    )
-  };
+			</div>
+		)
+	};
 }
 
 export default App;
