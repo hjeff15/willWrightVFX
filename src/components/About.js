@@ -27,7 +27,7 @@ const AboutStyle = styled.div`
 `;
 
 const TextStyle = styled.p`
-    font-size: 2.6vw;
+    font-size: 1.9vw;
     padding: 0px 90px 0px 90px;
     grid-area: middle;
     text-align: center;
@@ -35,12 +35,15 @@ const TextStyle = styled.p`
     animation-duration: 2s;
     animation-iteration-count: 1;
     @media only screen and (max-width: 850px){
-        font-size: 2.9vw;
+        font-size: 2vw;
         padding: 0px 70px 0px 70px;
     }
+    @media only screen and (max-width: 650px){
+        font-size: 2.1vw;
+    }
     @media only screen and (max-width: 400px){
-        font-size: 3.5vw;
-        padding: 0px 70px 0px 70px;
+        font-size: 3vw;
+        padding: 0px 50px 0px 50px;
         margin-top: 0px;
     }
 `;
@@ -64,6 +67,9 @@ const BottomSpan = styled.span`
     text-align: center;
     margin-left: 10%;
     margin-right: 10%;
+    @media only screen and (max-width: 400px){
+        display:none;
+    }
 `;
 
 export default class About extends Component {

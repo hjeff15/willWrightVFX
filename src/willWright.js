@@ -5,7 +5,7 @@ const willDetails = {
     showreel: 'https://vimeo.com/476581882',
     showreelPassword: 'Showreel2020',
     linkedInURL: 'https://www.linkedin.com/in/willwrightvfx/',
-    about: 'Experienced Nuke Compositor, with over 8 years in the industry. A great technical grounding of Nuke with a create eye. Also has a high standard for attention to detail, with a genuine passion for VFX.',
+    about: "Experienced Nuke Compositor, who has been working professionally in the industry since 2012. Has worked on shows such as 'Kingsman', 'Solo: A StarWars Story' and more recently 'The Witches'. Has a great technical grounding of Nuke with a creative eye and a high standard for attention to detail. Loves working within a team environment towards a goal. Has a genuine passion for films, storytelling and VFX. Always on the lookout for new exciting opportunities.",
     filmography:[
         {
             name: 'The Witches',

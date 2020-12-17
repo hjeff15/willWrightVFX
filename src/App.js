@@ -36,7 +36,10 @@ const DisplayGrid = styled.div`
 		grid-template-areas: 
 			"top"
 			"bottom";
-		}
+	}
+	@media only screen and (max-width: 400px){
+		grid-template-rows: 33vh auto;
+	}
 `;
 
 
@@ -48,6 +51,11 @@ class App extends React.Component {
 		filmography: false,
 		contact: false,
 		contactView: true
+	}
+
+	componentDidMount(){
+		console.log("Want a website? You can contact me HERE ☟");
+		console.log("https://www.hugojeffreys.me/ ");
 	}
 
 	changeView = (e) => {
@@ -79,7 +87,7 @@ class App extends React.Component {
 		}
 	}
 	render(){
-		console.log("IF YOU'RE HERE YOU CAN SEE MY PORTFOLIO HERE - https://www.hugojeffreys.me/ ")
+		
 		return (
 			<div>
 				<GlobalStyles/>
