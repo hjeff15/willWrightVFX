@@ -33,13 +33,16 @@ const ContactGrid = styled.div`
         position: sticky;
         top: 310px;
     }
+    @media only screen and (max-height: 500px){
+        grid-template-rows: 50px 250px 60px;
+    }
 `;
 
 const ContactTitle = styled.h2`
     grid-area: top;
     justify-self: center;
     color: rgba(255,245,245,0.6);
-    @media only screen and (max-width: 400px){
+    @media only screen and (max-width: 650px){
         z-index: -1;
     }
 `;
@@ -74,6 +77,7 @@ const TextBox = styled.textarea`
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
+    min-height: 2.8rem;
 `;
 
 const Input = styled.input`
@@ -174,7 +178,7 @@ class Contact extends React.Component{
                     </ButtonBox>
                 </FormArea>}
                 <Social>
-                    <a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.imdb.com/name/nm3962597/?ref_=fn_al_nm_1" target="_blank" rel="noopener noreferrer">
                         <SocialIconEl><FaImdb color="rgba(187, 187, 22, 0.68)" /></SocialIconEl>
                     </a>
                     <a href="https://www.linkedin.com/in/willwrightvfx/" target="_blank" rel="noopener noreferrer">

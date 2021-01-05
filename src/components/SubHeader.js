@@ -12,7 +12,7 @@ const WillSubHeader = styled.h3`
     padding-bottom: 30px;
     /* padding-bottom: 13px; */
     position:sticky;
-    top: 53px;
+    top: 52px;
 `;
 
 export default class SubHeader extends Component {
